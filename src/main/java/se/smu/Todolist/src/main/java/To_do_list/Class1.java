@@ -1,0 +1,74 @@
+package To_do_list;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import java.util.*;
+
+public class Class1 extends JFrame {
+	TextArea jta;
+	JButton jb1, jb2, jb3, jb4 ;
+	JTextField  jt1;
+	JLabel jl1, jl2, jl3 ;
+	String fs;
+	
+	Class1() {
+		setTitle("To Do List");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(null);
+		
+		MyActionListener listener = new MyActionListener();
+		JPanel jp1 = new JPanel();
+	    jp1.setLayout(new GridLayout(1,4));
+		jb1 = new JButton("오  늘");
+		jb2 = new JButton("달  력");
+		jb3 = new JButton("과  제");
+		jb4 = new JButton("등  록");
+		jb1.addActionListener(listener);
+		jb2.addActionListener(listener);
+		jb3.addActionListener(listener);
+		jb4.addActionListener(listener);
+		jp1.add(jb1);
+		jp1.add(jb2);
+		jp1.add(jb3);
+		jp1.add(jb4);
+		jp1.setLocation(20,450);
+		jp1.setSize(360,30);
+		
+		jta = new TextArea("",20, 40, TextArea.SCROLLBARS_NONE);
+		JScrollPane js = new JScrollPane(jta);
+		js.setSize(370, 400);
+		js.setLocation(15, 20);
+		
+		add(js);
+		add(jp1);
+	    setSize(415,550);
+	    setVisible(true);
+	}
+	
+	private class MyActionListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e) {
+			JButton b = (JButton)e.getSource();
+			if(b.getText().equals("오  늘")){
+				//오늘을 표시하는 함수 추가
+		    }
+		    else if(b.getText().equals("달  력")){
+		    	jta.setText("  *** 달  력 *** \n \n"); //달력을 표시하는 함수 추가
+		    }
+		    else if(b.getText().equals("과  제")){
+		    	setVisible(false);
+		    	new Class3();
+		    }
+		    else if(b.getText().equals("등  록")){
+		    	setVisible(false);
+		    	new Class2();
+		    }
+		}
+	}
+	
+	public static void main(String[] args) {
+		new Class1();
+	}
+}
+
+
