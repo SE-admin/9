@@ -5,11 +5,11 @@ import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
 
-public class Class2 extends JFrame{
+public class Class4 extends JFrame{
 	JTextArea jta;
-	JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9;
-	JTextField jt1, jt2, jt3, jt4, jt5;
-	JLabel jl1,jl2,jl3,jl4,jl5;
+	JButton jb1, jb2, jb3, jb4, jb5, jb6;
+	JTextField jt1, jt2, jt3, jt4;
+	JLabel jl1,jl2,jl3,jl4;
 	HashMap<String, List> m = new HashMap<String, List>();
 	
 	class List{
@@ -21,7 +21,7 @@ public class Class2 extends JFrame{
 	   }
 	}
 	
-	Class2(){
+	Class4(){
 	   setTitle("To Do List");
 	   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	   setLayout(null);
@@ -29,7 +29,7 @@ public class Class2 extends JFrame{
 	   MyActionListener listener = new MyActionListener ();
 	   JPanel jp1 = new JPanel();
 	   jp1.setLayout(new GridLayout(1,4));
-	   jb1 = new JButton("과목입력");
+	   jb1 = new JButton("ToDo입력");
 	   jb2 = new JButton("검색");
 	   jb3 = new JButton("삽입");
 	   jb4 = new JButton("삭제");
@@ -43,60 +43,37 @@ public class Class2 extends JFrame{
 	   jp1.add(jb4);
 	   jp1.setLocation(510,10);
 	   jp1.setSize(360,30);
-	   jb5 = new JButton("중 요");
+	   jb5 = new JButton("돌아가기");
 	   jb5.addActionListener(listener);
-	   jb5.setSize(70, 20);
-	   jb5.setLocation(460, 230);
+	   jb5.setSize(90, 30);
+	   jb5.setLocation(780, 260);
 	   add(jb5);
-	   jb6 = new JButton("돌아가기");
-	   jb6.addActionListener(listener);
-	   jb6.setSize(90, 30);
-	   jb6.setLocation(780, 260);
-	   add(jb6);
 	      
 	   JPanel jp2 = new JPanel();
-	   jp2.setLayout(new GridLayout(5,1));
-	   jl1 = new JLabel("Todo항목 명");
-	   jl2 = new JLabel("과목 명");
-	   jl3 = new JLabel("마감 기한");
-	   jl4 = new JLabel("실제 마감일");
-	   jl5 = new JLabel("완료or미완");
+	   jp2.setLayout(new GridLayout(4,1));
+	   jl1 = new JLabel("과목 명");
+	   jl2 = new JLabel("담당 교수");
+	   jl3 = new JLabel("강의 요일/시간");
+	   jl4 = new JLabel("수강 년도/학기");
 	   jp2.add(jl1);
 	   jp2.add(jl2);
 	   jp2.add(jl3);
 	   jp2.add(jl4);
-	   jp2.add(jl5);
-	   jp2.setLocation(460,60);
-	   jp2.setSize(80,150);
+	   jp2.setLocation(460,90);
+	   jp2.setSize(90,120);
 	      
 	   JPanel jp3 = new JPanel();
-	   jp3.setLayout(new GridLayout(5,1));
+	   jp3.setLayout(new GridLayout(4,1));
 	   jt1 = new JTextField();
 	   jt2 = new JTextField();
 	   jt3 = new JTextField();
 	   jt4 = new JTextField();
-	   jt5 = new JTextField();
-	   jp3.setLocation(550,60);
-	   jp3.setSize(320,150);
+	   jp3.setLocation(550,90);
+	   jp3.setSize(320,120);
 	   jp3.add(jt1);
 	   jp3.add(jt2);
 	   jp3.add(jt3);
 	   jp3.add(jt4);
-	   jp3.add(jt5);
-	   
-	   JPanel jp4 = new JPanel();
-	   jp4.setLayout(new GridLayout(1,3));
-	   jb7 = new JButton("힘듬");
-	   jb8 = new JButton("오래걸림");
-	   jb9 = new JButton("팀플");
-	   jb7.addActionListener(listener);
-	   jb8.addActionListener(listener);
-	   jb9.addActionListener(listener);
-	   jp4.add(jb7);
-	   jp4.add(jb8);
-	   jp4.add(jb9);
-	   jp4.setLocation(460,270);
-	   jp4.setSize(270,20);
 	   
 	   jta = new JTextArea();
 	   JScrollPane js = new JScrollPane(jta);
@@ -107,7 +84,6 @@ public class Class2 extends JFrame{
 	   add(jp1);
 	   add(jp2);
 	   add(jp3);
-	   add(jp4);
 	   setSize(900,350);
 	   setVisible(true);
 	}
@@ -153,9 +129,9 @@ public class Class2 extends JFrame{
 	    	  setVisible(false);
 	    	  new Class1();
 	      }
-	      else if(b.getText().equals("과목입력")){
+	      else if(b.getText().equals("ToDo입력")){
 	    	  setVisible(false);
-	    	  new Class4();
+	    	  new Class2();
 	      }
 	   }
 	}
