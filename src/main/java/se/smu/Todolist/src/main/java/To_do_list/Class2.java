@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
 
-public class Class2 extends JFrame{
+public class Class2 extends JFrame{ //µî·Ï
 	JTextArea jta;
 	JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9;
 	JTextField jt1, jt2, jt3, jt4, jt5;
