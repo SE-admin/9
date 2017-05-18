@@ -1,6 +1,7 @@
 package To_do_list;
 
 import javax.swing.*;
+import java.io.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
@@ -15,9 +16,11 @@ public class Class4 extends JFrame{
 	class List{
 	   String s1;
 	   String s2;
-	   public List(String s1, String s2){
+	   String s3;
+	   public List(String s1, String s2, String s3){
 	      this.s1 = s1;
 	      this.s2 = s2;
+	      this.s3 = s3;
 	   }
 	}
 	
@@ -86,8 +89,23 @@ public class Class4 extends JFrame{
 	   add(jp3);
 	   setSize(900,350);
 	   setVisible(true);
-	}
 	   
+	   try{
+		   String[][] array = new String[100][4];   
+		   Scanner sc = new Scanner( new File("subject.txt") );
+		   for(int i=0 ; i<array.length ; i++) { 
+			   for(int j=0 ; j<array[i].length ; j++) { 
+				   array[i][j] = sc.next(); 
+			   } 
+		   } 
+		   for(int i=0 ; i<array.length ; i++) {
+			   m.put(array[i][0], new List(array[i][1],array[i][2],array[i][3]));
+		   } 
+	   }catch(IOException e1){
+		   System.out.println("입출력 오류");
+	   }
+	}
+	
 	class MyActionListener implements ActionListener{ 
 	   public void actionPerformed(ActionEvent e){ 
 	      JButton b = (JButton)e.getSource();
@@ -100,23 +118,43 @@ public class Class4 extends JFrame{
 	         while(it.hasNext()) {
 	            String name = it.next();
 	            List person = m.get(name);
-	            jta.append(name + " : " + person.s1 + " " + person.s2+"\n");
+	            jta.append(name + " - " + person.s1 + " " + person.s2+ " "+person.s3+"\n");
 	         }
 	      }
 	      else if(b.getText().equals("검색")){
 	         if(m.containsKey(jt1.getText())){
 	        	List personx = m.get(jt1.getText());
-	            jta.append(jt1.getText()+" : "+personx.s1 + " " + personx.s2+"\n"); 
+	            jta.append(jt1.getText()+" - "+personx.s1 + " " + personx.s2+" "+personx.s3+"\n"); 
 	         }
 	         jt1.setText("");
 	         jt2.setText("");
 	         jt3.setText("");
+	         jt4.setText("");
 	      }
 	      else if(b.getText().equals("삽입")){
-	         m.put(jt1.getText(), new List(jt2.getText(),jt3.getText()));
-	         jt1.setText("");
-	         jt2.setText("");
-	         jt3.setText("");
+	    	  m.put(jt1.getText(), new List(jt2.getText(),jt3.getText(), jt4.getText()));
+		         jt1.setText("");
+		         jt2.setText("");
+		         jt3.setText("");
+		         jt4.setText("");
+	    	  try{
+	    		  File f = new File("subject.txt");
+	    		  FileWriter fw = new FileWriter(f);
+	    		  PrintWriter pw = new PrintWriter(fw);
+	    		  Set<String> names = m.keySet();
+			      Vector<String>v = new Vector<String>();
+			      v.addAll(names); 
+			      Collections.sort(v);
+			      Iterator<String> it = v.iterator();
+			      while(it.hasNext()) {
+			         String name = it.next();
+			         List person = m.get(name);
+			         pw.println(name + " - " + person.s1 + " " + person.s2+ " "+person.s3);
+			      }
+	    		  pw.close();
+	    	  }catch(IOException e1){
+	    		  System.out.println("입출력 오류");
+	    	  }
 	      }
 	      else if(b.getText().equals("삭제")){
 	         if(m.containsKey(jt1.getText()))
@@ -124,6 +162,7 @@ public class Class4 extends JFrame{
 	         jt1.setText("");
 	         jt2.setText("");
 	         jt3.setText("");
+	         jt4.setText("");
 	      }
 	      else if(b.getText().equals("돌아가기")){
 	    	  setVisible(false);
@@ -134,5 +173,6 @@ public class Class4 extends JFrame{
 	    	  new Class2();
 	      }
 	   }
+
 	}
 }
