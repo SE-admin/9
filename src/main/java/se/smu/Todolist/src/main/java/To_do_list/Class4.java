@@ -131,7 +131,7 @@ public class Class4 extends JFrame{
 	         jt3.setText("");
 	         jt4.setText("");
 	      }
-	      else if(b.getText().equals("삽입")){
+	      else if(b.getText().equals("삽입")){//담당교수 등록
 	    	  m.put(jt1.getText(), new List(jt2.getText(),jt3.getText(), jt4.getText()));
 		         jt1.setText("");
 		         jt2.setText("");
