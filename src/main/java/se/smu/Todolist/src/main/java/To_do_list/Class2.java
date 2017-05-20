@@ -158,7 +158,7 @@ public class Class2 extends JFrame{ //등록
 	         jt4.setText("");
 	         jt5.setText("");
 	      }
-	      else if(b.getText().equals("삽입")){ //마감 기한을 등록
+	      else if(b.getText().equals("삽입")){ //실제 마감일을 등록
 	    	 try{
 	    		 Scanner scan = new Scanner(new File("list.txt"));
 	    		 while(scan.hasNextLine()) { 
