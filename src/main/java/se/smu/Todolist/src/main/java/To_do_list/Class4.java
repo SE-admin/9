@@ -89,21 +89,6 @@ public class Class4 extends JFrame{
 	   add(jp3);
 	   setSize(900,350);
 	   setVisible(true);
-	   
-	   try{
-		   String[][] array = new String[100][4];   
-		   Scanner sc = new Scanner( new File("subject.txt") );
-		   for(int i=0 ; i<array.length ; i++) { 
-			   for(int j=0 ; j<array[i].length ; j++) { 
-				   array[i][j] = sc.next(); 
-			   } 
-		   } 
-		   for(int i=0 ; i<array.length ; i++) {
-			   m.put(array[i][0], new List(array[i][1],array[i][2],array[i][3]));
-		   } 
-	   }catch(IOException e1){
-		   System.out.println("입출력 오류");
-	   }
 	}
 	
 	class MyActionListener implements ActionListener{ 

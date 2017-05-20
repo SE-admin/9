@@ -1,23 +1,32 @@
 package To_do_list;
 
 import javax.swing.*;
+
+import To_do_list.Class4.List;
+
 import java.awt.event.*;
+import java.io.*;
 import java.awt.*;
 import java.util.*;
 
 public class Class2 extends JFrame{ //등록
+	int p=0;
 	JTextArea jta;
 	JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9;
 	JTextField jt1, jt2, jt3, jt4, jt5;
 	JLabel jl1,jl2,jl3,jl4,jl5;
-	HashMap<String, List> m = new HashMap<String, List>();
+	HashMap<String, List> o = new HashMap<String, List>();
 	
 	class List{
-	   String s1;
-	   String s2;
-	   public List(String s1, String s2){
-	      this.s1 = s1;
-	      this.s2 = s2;
+	   String n1;
+	   String n2;
+	   String n3;
+	   String n4;
+	   public List(String n1, String n2, String n3, String n4){
+	      this.n1 = n1;
+	      this.n2 = n2;
+	      this.n3 = n3;
+	      this.n4 = n4;
 	   }
 	}
 	
@@ -116,38 +125,118 @@ public class Class2 extends JFrame{ //등록
 	   public void actionPerformed(ActionEvent e){ 
 	      JButton b = (JButton)e.getSource();
 	      if(b.getText().equals("조회")){
-	         Set<String> names = m.keySet();
+	         Set<String> names = o.keySet();
 	         Vector<String>v = new Vector<String>();
 	         v.addAll(names); 
 	         Collections.sort(v);
 	         Iterator<String> it = v.iterator();
 	         while(it.hasNext()) {
 	            String name = it.next();
-	            List person = m.get(name);
-	            jta.append(name + " : " + person.s1 + " " + person.s2+"\n");
+	            List person = o.get(name);
+	            jta.append(name + " - " + person.n1 + " " + person.n2+" "+person.n3+" "+person.n4+"\n");
 	         }
 	      }
 	      else if(b.getText().equals("검색")){
-	         if(m.containsKey(jt1.getText())){
-	        	List personx = m.get(jt1.getText());
-	            jta.append(jt1.getText()+" : "+personx.s1 + " " + personx.s2+"\n"); 
+	    	 try{
+		    	 Scanner scan = new Scanner(new File("list.txt"));
+		    	 while(scan.hasNextLine()) { 
+		    		 String str = scan.nextLine();
+		    		 String[] strArray = str.split(" ");
+					    o.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5]));
+		    	 }
+				 scan.close();
+		     }catch(IOException e1){
+		    	 System.out.println("입출력 오류");
+		     }
+	         if(o.containsKey(jt1.getText())){
+	        	List personx = o.get(jt1.getText());
+	            jta.append(jt1.getText()+" - "+personx.n1 + " " + personx.n2+" "+personx.n3+" "+personx.n4+"\n"); 
 	         }
 	         jt1.setText("");
 	         jt2.setText("");
 	         jt3.setText("");
+	         jt4.setText("");
+	         jt5.setText("");
 	      }
 	      else if(b.getText().equals("삽입")){
-	         m.put(jt1.getText(), new List(jt2.getText(),jt3.getText()));
+	    	 try{
+	    		 Scanner scan = new Scanner(new File("list.txt"));
+	    		 while(scan.hasNextLine()) { 
+	    			 String str = scan.nextLine();
+	    			 String[] strArray = str.split(" ");
+				     o.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5]));
+	    		 }
+			     scan.close();
+	    	 }catch(IOException e1){
+	    		 System.out.println("입출력 오류");
+	    	 }
+	    	 if(p==0)
+	    		 o.put(jt1.getText(), new List(jt2.getText(),jt3.getText(),jt4.getText(),jt5.getText()));
+	    	 else if(p==1){
+	    		 o.put(jt1.getText(), new List(jt2.getText(),jt3.getText(),jt4.getText(),jt5.getText()+"*"));
+	    		 p=0;
+	    	 }
 	         jt1.setText("");
 	         jt2.setText("");
 	         jt3.setText("");
+	         jt4.setText("");
+	         jt5.setText("");
+	         try{
+	    		  File f = new File("list.txt");
+	    		  FileWriter fw = new FileWriter(f);
+	    		  PrintWriter pw = new PrintWriter(fw);
+	    		  Set<String> names = o.keySet();
+			      Vector<String>v = new Vector<String>();
+			      v.addAll(names); 
+			      Collections.sort(v);
+			      Iterator<String> it = v.iterator();
+			      while(it.hasNext()) {
+			         String name = it.next();
+			         List person = o.get(name);
+			         pw.println(name + " - " + person.n1 + " " + person.n2+ " "+person.n3+" "+person.n4);
+			      }
+	    		  pw.close();
+	    	  }catch(IOException e1){
+	    		  System.out.println("입출력 오류");
+	    	  }
 	      }
 	      else if(b.getText().equals("삭제")){
-	         if(m.containsKey(jt1.getText()))
-	            m.remove(jt1.getText());
+	    	 try{
+			    Scanner scan = new Scanner(new File("list.txt"));
+			    while(scan.hasNextLine()) { 
+			    	String str = scan.nextLine();
+			    	String[] strArray = str.split(" ");
+						  o.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5]));
+			    }
+				scan.close();
+			 }catch(IOException e1){
+			    System.out.println("입출력 오류");
+			 }
+	         if(o.containsKey(jt1.getText()))
+	            o.remove(jt1.getText());
 	         jt1.setText("");
 	         jt2.setText("");
 	         jt3.setText("");
+	         jt4.setText("");
+	         jt5.setText("");
+	         try{
+	    		  File f = new File("list.txt");
+	    		  FileWriter fw = new FileWriter(f);
+	    		  PrintWriter pw = new PrintWriter(fw);
+	    		  Set<String> names = o.keySet();
+			      Vector<String>v = new Vector<String>();
+			      v.addAll(names); 
+			      Collections.sort(v);
+			      Iterator<String> it = v.iterator();
+			      while(it.hasNext()) {
+			         String name = it.next();
+			         List person = o.get(name);
+			         pw.println(name + " - " + person.n1 + " " + person.n2+ " "+person.n3+" "+person.n4);
+			      }
+	    		  pw.close();
+	    	 }catch(IOException e1){
+	    		  System.out.println("입출력 오류");
+	    	 }
 	      }
 	      else if(b.getText().equals("돌아가기")){
 	    	  setVisible(false);
@@ -156,6 +245,9 @@ public class Class2 extends JFrame{ //등록
 	      else if(b.getText().equals("과목입력")){
 	    	  setVisible(false);
 	    	  new Class4();
+	      }
+	      else if(b.getText().equals("중 요")){
+	    	  p=1;
 	      }
 	   }
 	}
