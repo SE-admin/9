@@ -1,6 +1,9 @@
 package To_do_list;
 
 import javax.swing.*;
+
+import To_do_list.Class2.List;
+
 import java.io.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -107,6 +110,17 @@ public class Class4 extends JFrame{
 	         }
 	      }
 	      else if(b.getText().equals("검색")){
+	    	 try{
+		    	Scanner scan = new Scanner(new File("subject.txt"));
+		    	while(scan.hasNextLine()) { 
+		    		String str = scan.nextLine();
+		    		String[] strArray = str.split(" ");
+					m.put(strArray[0], new List(strArray[2],strArray[3],strArray[4]));
+		    	}
+				scan.close();
+		     }catch(IOException e1){
+		   	    System.out.println("입출력 오류");
+		     }
 	         if(m.containsKey(jt1.getText())){
 	        	List personx = m.get(jt1.getText());
 	            jta.append(jt1.getText()+" - "+personx.s1 + " " + personx.s2+" "+personx.s3+"\n"); 
@@ -116,7 +130,18 @@ public class Class4 extends JFrame{
 	         jt3.setText("");
 	         jt4.setText("");
 	      }
-	      else if(b.getText().equals("삽입")){//수강년도/학기 등록
+	      else if(b.getText().equals("삽입")){
+	    	  try{
+		    	  Scanner scan = new Scanner(new File("subject.txt"));
+		    	  while(scan.hasNextLine()) { 
+		    		  String str = scan.nextLine();
+		    		  String[] strArray = str.split(" ");
+					  m.put(strArray[0], new List(strArray[2],strArray[3],strArray[4]));
+		    	  }
+				  scan.close();
+		      }catch(IOException e1){
+		    	  System.out.println("입출력 오류");
+		      }
 	    	  m.put(jt1.getText(), new List(jt2.getText(),jt3.getText(), jt4.getText()));
 		         jt1.setText("");
 		         jt2.setText("");
@@ -142,6 +167,17 @@ public class Class4 extends JFrame{
 	    	  }
 	      }
 	      else if(b.getText().equals("삭제")){
+	    	 try{
+		    	Scanner scan = new Scanner(new File("subject.txt"));
+		    	while(scan.hasNextLine()) { 
+		    		String str = scan.nextLine();
+		    		String[] strArray = str.split(" ");
+					m.put(strArray[0], new List(strArray[2],strArray[3],strArray[4]));
+		    	}
+			 	scan.close();
+		     }catch(IOException e1){
+		     	System.out.println("입출력 오류");
+		     }
 	         if(m.containsKey(jt1.getText()))
 	            m.remove(jt1.getText());
 	         jt1.setText("");
