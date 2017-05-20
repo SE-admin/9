@@ -158,7 +158,7 @@ public class Class2 extends JFrame{ //등록
 	         jt4.setText("");
 	         jt5.setText("");
 	      }
-	      else if(b.getText().equals("삽입")){ //완료 여부를 등록
+	      else if(b.getText().equals("삽입")){ //중요 여부를 등록
 	    	 try{
 	    		 Scanner scan = new Scanner(new File("list.txt"));
 	    		 while(scan.hasNextLine()) { 
@@ -246,7 +246,7 @@ public class Class2 extends JFrame{ //등록
 	    	  setVisible(false);
 	    	  new Class4();
 	      }
-	      else if(b.getText().equals("중 요")){
+	      else if(b.getText().equals("중 요")){// 중요 여부를 등록
 	    	  p=1;
 	      }
 	   }
