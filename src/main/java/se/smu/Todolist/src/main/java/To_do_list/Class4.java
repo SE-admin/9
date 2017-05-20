@@ -130,7 +130,7 @@ public class Class4 extends JFrame{
 	         jt3.setText("");
 	         jt4.setText("");
 	      }
-	      else if(b.getText().equals("삽입")){
+	      else if(b.getText().equals("삽입")){ // 과목 변경(과목명이 같고 내용이 다르면 변경)
 	    	  try{
 		    	  Scanner scan = new Scanner(new File("subject.txt"));
 		    	  while(scan.hasNextLine()) { 
