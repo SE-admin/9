@@ -158,7 +158,7 @@ public class Class2 extends JFrame{ //등록
 	         jt4.setText("");
 	         jt5.setText("");
 	      }
-	      else if(b.getText().equals("삽입")){ //중요도를 표시
+	      else if(b.getText().equals("삽입")){ //To do 항목 변경
 	    	 try{
 	    		 Scanner scan = new Scanner(new File("list.txt"));
 	    		 while(scan.hasNextLine()) { 
