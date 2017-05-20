@@ -200,7 +200,7 @@ public class Class2 extends JFrame{ //등록
 	    		  System.out.println("입출력 오류");
 	    	  }
 	      }
-	      else if(b.getText().equals("삭제")){
+	      else if(b.getText().equals("삭제")){//To do 항목 삭제
 	    	 try{
 			    Scanner scan = new Scanner(new File("list.txt"));
 			    while(scan.hasNextLine()) { 
