@@ -3,12 +3,12 @@ package To_do_list;
 import javax.swing.*;
 
 import To_do_list.Class2.List;
-
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.awt.*;
 import java.util.*;
+
 
 public class Class1 extends JFrame { // 오늘, 달력
 	TextArea jta;
@@ -21,8 +21,9 @@ public class Class1 extends JFrame { // 오늘, 달력
 	int numOfList=0;
 	int[] saveList = new int[10];
 	String sDate = new String();
+	
+	
 	HashMap<String, List> hashList = new HashMap<String, List>();
-
 	class List{
 	   String n1;
 	   String n2;
@@ -97,18 +98,16 @@ public class Class1 extends JFrame { // 오늘, 달력
 				    
 
 				    //총합날짜구하기
-				    SumDate nowSumDate = new SumDate();
-				    nowSumDate.setSumDate(nowDate, nowMonth, nowYear);
 				    SumDate listSumDate = new SumDate();
+				    SumDate nowSumDate = new SumDate();
 				    
 				    //ex) 20170517 을 입력하면 17 05 2017 이렇게 나눠서 입력됩니다.
 				    listSumDate.setSumDate(StrToInt[numOfList]%100 ,(StrToInt[numOfList]%10000)/100, StrToInt[numOfList]/10000);
-				    
+				    nowSumDate.setSumDate(nowDate, nowMonth, nowYear);
 				    //기한구하기
 				    Duration listDuration = new Duration();
 				    listDuration.setDuration(listSumDate.getSumDateDetail(),nowSumDate.getSumDateDetail() );
-				    System.out.println(listDuration.getDuration());
-					
+				    
 				    List hashKey = hashList.get(strArray[0]);
 					//기한이 0 이면 해당 배열을 출력합니다.
 				    if(listDuration.getDuration()==0)
@@ -136,7 +135,84 @@ public class Class1 extends JFrame { // 오늘, 달력
 				new Class1();
 		    }
 		    else if(b.getText().equals("달  력")){
-		    	jta.setText("  *** 달  력 *** \n \n"); //달력을 표시하는 함수 추가
+
+		    	/*달력 표시 : 이번달~다음달까지*/
+		    	int beforMonth,beforYear;
+		    	int afterMonth,afterYear;
+
+		    	if(nowMonth-1<0){
+
+		    		beforMonth=12;
+		    		beforYear=nowYear-1;
+		    	}
+		    	else{
+		    		beforMonth=nowMonth-1;
+		    		beforYear=nowYear;
+		    	}
+		    	
+		    	if(nowMonth+1>12){
+		    		afterMonth=1;
+		    		afterYear=nowYear+1;
+		    	}
+		    	else{
+		    		afterMonth=nowMonth+1;
+		    		afterYear=nowYear;	
+		    	}
+
+
+		    	int count=0;
+		    	/*저번달*/
+		    	PrintCal beforCal = new PrintCal();
+		    	SumDate beforSumDate = new SumDate();
+		    	beforSumDate.setSumDate(beforMonth, beforYear);
+		    	beforCal.MakeCalendar(beforSumDate.getSumDate());
+		    	while(count<numOfList-1){
+
+		    		if((StrToInt[count]%10000)/100==beforMonth)
+		    		beforCal.setCal(StrToInt[count]%100,beforMonth, beforYear);
+		    		else
+		    		beforCal.setCal(0,beforMonth, beforYear);
+		    		count++;
+		    	}
+		    	jta.setText(beforCal.getCal());
+		    	count=0;
+		    	
+
+		    	/*이번달 */
+		    	PrintCal nowCal = new PrintCal();
+		    	SumDate nowSumDate = new SumDate();
+		    	nowSumDate.setSumDate(nowMonth, nowYear);
+		    	nowCal.MakeCalendar(nowSumDate.getSumDate());
+
+		    	while(count<numOfList-1){
+		    		if((StrToInt[count]%10000)/100==nowMonth)
+		    		nowCal.setCal(StrToInt[count]%100,nowMonth, nowYear);
+		    		else
+		    		nowCal.setCal(0,nowMonth, nowYear);
+		    		
+		    		count++;
+		    		
+		    	}
+		    	jta.append(nowCal.getCal());
+		    	count=0;
+		    	
+		    	/*다음달*/
+		    	PrintCal afterCal = new PrintCal();
+		    	SumDate afterSumDate = new SumDate();
+		    	afterSumDate.setSumDate(afterMonth, afterYear);
+		    	afterCal.MakeCalendar(afterSumDate.getSumDate());
+		    	
+		    	while(count<numOfList-1){
+		    		if((StrToInt[count]%10000)/100==afterMonth)
+			    		afterCal.setCal(StrToInt[count]%100,afterMonth, afterYear);
+			    		else
+			    		afterCal.setCal(0,afterMonth, afterYear);
+			    		
+			    	count++;	
+		    	}// 요기 첫번째에 날짜 입력해주시면 o표시가 되요
+		    	
+		    	jta.append(afterCal.getCal());
+		    	
 		    }
 		    else if(b.getText().equals("과  제")){
 		    	setVisible(false);
