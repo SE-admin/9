@@ -90,7 +90,7 @@ public class Class4 extends JFrame{
 	   add(jp1);
 	   add(jp2);
 	   add(jp3);
-	   setSize(900,350);
+	   setSize(900,360);
 	   setVisible(true);
 	}
 	

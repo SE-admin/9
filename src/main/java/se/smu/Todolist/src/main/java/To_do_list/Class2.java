@@ -115,7 +115,7 @@ public class Class2 extends JFrame{ //등록
 	   jp4.setLocation(460,270);
 	   jp4.setSize(270,20);
 	   
-	   JPanel jp5 = new JPanel();
+	   JPanel jp5 = new JPanel(); // 입력형식 지정
 	   jp5.setLayout(new GridLayout(2,1));
 	   jl6 = new JLabel("마감기한, 실제마감일 입력 형식 : yyyymmdd");
 	   jp5.add(jl6);
@@ -133,7 +133,7 @@ public class Class2 extends JFrame{ //등록
 	   add(jp3);
 	   add(jp4);
 	   add(jp5);
-	   setSize(900,330);
+	   setSize(900,360);
 	   setVisible(true);
 	}
 	   
