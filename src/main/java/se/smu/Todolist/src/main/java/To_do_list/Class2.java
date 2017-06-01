@@ -10,11 +10,11 @@ import java.awt.*;
 import java.util.*;
 
 public class Class2 extends JFrame{ //등록
-	int p=0;
+	int important=0,tag_hard=0,tag_long=0,tag_team=0;
 	JTextArea jta;
 	JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9;
 	JTextField jt1, jt2, jt3, jt4, jt5;
-	JLabel jl1,jl2,jl3,jl4,jl5;
+	JLabel jl1,jl2,jl3,jl4,jl5,jl6;
 	HashMap<String, List> o = new HashMap<String, List>();
 	
 	class List{
@@ -22,11 +22,19 @@ public class Class2 extends JFrame{ //등록
 	   String n2;
 	   String n3;
 	   String n4;
-	   public List(String n1, String n2, String n3, String n4){
+	   String n5;
+	   String n6;
+	   String n7;
+	   String n8;
+	   public List(String n1, String n2, String n3, String n4, String n5, String n6, String n7, String n8){
 	      this.n1 = n1;
 	      this.n2 = n2;
 	      this.n3 = n3;
 	      this.n4 = n4;
+	      this.n5 = n5;
+	      this.n6 = n6;
+	      this.n7 = n7;
+	      this.n8 = n8;
 	   }
 	}
 	
@@ -107,6 +115,13 @@ public class Class2 extends JFrame{ //등록
 	   jp4.setLocation(460,270);
 	   jp4.setSize(270,20);
 	   
+	   JPanel jp5 = new JPanel();
+	   jp5.setLayout(new GridLayout(2,1));
+	   jl6 = new JLabel("마감기한, 실제마감일 입력 형식 : yyyymmdd");
+	   jp5.add(jl6);
+	   jp5.setLocation(10,270);
+	   jp5.setSize(300,30);
+	   
 	   jta = new JTextArea();
 	   JScrollPane js = new JScrollPane(jta);
 	   js.setLocation(10,10);
@@ -117,32 +132,31 @@ public class Class2 extends JFrame{ //등록
 	   add(jp2);
 	   add(jp3);
 	   add(jp4);
-	   setSize(900,350);
+	   add(jp5);
+	   setSize(900,330);
 	   setVisible(true);
 	}
 	   
 	class MyActionListener implements ActionListener{ 
 	   public void actionPerformed(ActionEvent e){ 
 	      JButton b = (JButton)e.getSource();
-	      if(b.getText().equals("조회")){
-	         Set<String> names = o.keySet();
-	         Vector<String>v = new Vector<String>();
-	         v.addAll(names); 
-	         Collections.sort(v);
-	         Iterator<String> it = v.iterator();
-	         while(it.hasNext()) {
-	            String name = it.next();
-	            List person = o.get(name);
-	            jta.append(name + " - " + person.n1 + " " + person.n2+" "+person.n3+" "+person.n4+"\n");
-	         }
-	      }
-	      else if(b.getText().equals("검색")){
+	      if(b.getText().equals("검색")){
+	    	 Color prevColor = b.getBackground();
+	    	 String importants = null, tag_hards = null, tag_longs = null, tag_teams = null;
+		     jb5.setBackground(prevColor);
+		     jb7.setBackground(prevColor);
+		     jb8.setBackground(prevColor);
+		     jb9.setBackground(prevColor);
+		     important = 0;
+	    	 tag_hard = 0;
+	    	 tag_long = 0;
+	    	 tag_team = 0;
 	    	 try{
 		    	 Scanner scan = new Scanner(new File("list.txt"));
 		    	 while(scan.hasNextLine()) { 
 		    		 String str = scan.nextLine();
 		    		 String[] strArray = str.split(" ");
-					    o.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5]));
+					    o.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5],strArray[6],strArray[7],strArray[8],strArray[9]));
 		    	 }
 				 scan.close();
 		     }catch(IOException e1){
@@ -150,7 +164,24 @@ public class Class2 extends JFrame{ //등록
 		     }
 	         if(o.containsKey(jt1.getText())){
 	        	List personx = o.get(jt1.getText());
-	            jta.append(jt1.getText()+" - "+personx.n1 + " " + personx.n2+" "+personx.n3+" "+personx.n4+"\n"); 
+	        	jta.append(jt1.getText()+" - "+personx.n1+" "+personx.n2+" "+personx.n3+" "+personx.n4+" ");
+	        	if(personx.n5.equals("1")){
+	        		importants="*";
+	        		jta.append(importants+" ");
+	        	}
+	        	if(personx.n6.equals("1")){
+	        		tag_hards="힘듬";
+	        		jta.append(tag_hards+" "); 
+	        	}
+	        	if(personx.n7.equals("1")){
+	        		tag_longs="오래걸림";
+	        		jta.append(tag_longs+" "); 
+	        	}
+	        	if(personx.n8.equals("1")){
+	        		tag_teams="팀플";
+	        		jta.append(tag_teams); 
+	        	}
+	        	jta.append("\n");
 	         }
 	         jt1.setText("");
 	         jt2.setText("");
@@ -159,23 +190,27 @@ public class Class2 extends JFrame{ //등록
 	         jt5.setText("");
 	      }
 	      else if(b.getText().equals("삽입")){ //To do 항목 변경
+	    	 Color prevColor = b.getBackground();
+	    	 jb5.setBackground(prevColor);
+	    	 jb7.setBackground(prevColor);
+		     jb8.setBackground(prevColor);
+		     jb9.setBackground(prevColor);
 	    	 try{
 	    		 Scanner scan = new Scanner(new File("list.txt"));
 	    		 while(scan.hasNextLine()) { 
 	    			 String str = scan.nextLine();
 	    			 String[] strArray = str.split(" ");
-				     o.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5]));
+				     o.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5],strArray[6],strArray[7],strArray[8],strArray[9]));
 	    		 }
 			     scan.close();
 	    	 }catch(IOException e1){
 	    		 System.out.println("입출력 오류");
 	    	 }
-	    	 if(p==0)
-	    		 o.put(jt1.getText(), new List(jt2.getText(),jt3.getText(),jt4.getText(),jt5.getText()));
-	    	 else if(p==1){
-	    		 o.put(jt1.getText(), new List(jt2.getText(),jt3.getText(),jt4.getText(),jt5.getText()+"*"));
-	    		 p=0;
-	    	 }
+	    	 o.put(jt1.getText(), new List(jt2.getText(),jt3.getText(),jt4.getText(),jt5.getText(),String.valueOf(important),String.valueOf(tag_hard),String.valueOf(tag_long),String.valueOf(tag_team)));
+	    	 important = 0;
+	    	 tag_hard = 0;
+	    	 tag_long = 0;
+	    	 tag_team = 0;
 	         jt1.setText("");
 	         jt2.setText("");
 	         jt3.setText("");
@@ -193,7 +228,7 @@ public class Class2 extends JFrame{ //등록
 			      while(it.hasNext()) {
 			         String name = it.next();
 			         List person = o.get(name);
-			         pw.println(name + " - " + person.n1 + " " + person.n2+ " "+person.n3+" "+person.n4);
+			         pw.println(name+" - "+person.n1+" "+person.n2+" "+person.n3+" "+person.n4+" "+person.n5+" "+person.n6+" "+person.n7+" "+person.n8);
 			      }
 	    		  pw.close();
 	    	  }catch(IOException e1){
@@ -201,12 +236,21 @@ public class Class2 extends JFrame{ //등록
 	    	  }
 	      }
 	      else if(b.getText().equals("삭제")){//To do 항목 삭제
+	    	 Color prevColor = b.getBackground();
+		     jb5.setBackground(prevColor);
+		     jb7.setBackground(prevColor);
+		     jb8.setBackground(prevColor);
+		     jb9.setBackground(prevColor);
+		     important = 0;
+	    	 tag_hard = 0;
+	    	 tag_long = 0;
+	    	 tag_team = 0;
 	    	 try{
 			    Scanner scan = new Scanner(new File("list.txt"));
 			    while(scan.hasNextLine()) { 
 			    	String str = scan.nextLine();
 			    	String[] strArray = str.split(" ");
-						  o.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5]));
+						  o.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5],strArray[6],strArray[7],strArray[8],strArray[9]));
 			    }
 				scan.close();
 			 }catch(IOException e1){
@@ -231,7 +275,7 @@ public class Class2 extends JFrame{ //등록
 			      while(it.hasNext()) {
 			         String name = it.next();
 			         List person = o.get(name);
-			         pw.println(name + " - " + person.n1 + " " + person.n2+ " "+person.n3+" "+person.n4);
+			         pw.println(name+" - "+person.n1+" "+person.n2+" "+person.n3+" "+person.n4+" "+person.n5+" "+person.n6+" "+person.n7+" "+person.n8);
 			      }
 	    		  pw.close();
 	    	 }catch(IOException e1){
@@ -247,7 +291,48 @@ public class Class2 extends JFrame{ //등록
 	    	  new Class4();
 	      }
 	      else if(b.getText().equals("중 요")){// 중요 여부를 등록
-	    	  p=1;
+	    	  Color prevColor = jb1.getBackground();
+	    	  if(important == 0){
+	    		  important=1;  
+	    		  b.setBackground(Color.YELLOW);
+	    	  }
+	    	  else if(important == 1){
+	    		  important=0;
+	    		  b.setBackground(prevColor);
+	    	  }
+	      }
+	      else if(b.getText().equals("힘듬")){// 힘듬 여부를 등록
+	    	  Color prevColor = jb1.getBackground();
+	    	  if(tag_hard == 0){
+	    		  tag_hard=1;  
+	    		  b.setBackground(Color.YELLOW);
+	    	  }
+	    	  else if(tag_hard == 1){
+	    		  tag_hard=0;
+	    		  b.setBackground(prevColor);
+	    	  }
+	      }
+	      else if(b.getText().equals("오래걸림")){// 오래걸림 여부를 등록
+	    	  Color prevColor = jb1.getBackground();
+	    	  if(tag_long == 0){
+	    		  tag_long=1;  
+	    		  b.setBackground(Color.YELLOW);
+	    	  }
+	    	  else if(tag_long == 1){
+	    		  tag_long=0;
+	    		  b.setBackground(prevColor);
+	    	  }
+	      }
+	      else if(b.getText().equals("팀플")){// 팀플 여부를 등록
+	    	  Color prevColor = jb1.getBackground();
+	    	  if(tag_team == 0){
+	    		  tag_team=1;  
+	    		  b.setBackground(Color.YELLOW);
+	    	  }
+	    	  else if(tag_team == 1){
+	    		  tag_team=0;
+	    		  b.setBackground(prevColor);
+	    	  }
 	      }
 	   }
 	}
