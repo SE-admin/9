@@ -104,11 +104,16 @@ public class Class3 extends JFrame {
 			e1.printStackTrace();
 			System.out.println("입출력 오류");
 		}
+
+		
 	}
 
 	class MyActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
+			
+			jta.setText("");
+			
 			if (b.getText().equals("오늘")) {
 				hs.clear();//다른 버튼을 눌렀을 경우 해쉬맵 초기화.
 				setVisible(false);
@@ -125,9 +130,12 @@ public class Class3 extends JFrame {
 				setVisible(false);
 				new Class2();
 			} else if (b.getText().contains("진행 완성")) { // 진행완성을 눌렀을 경우\
+				jta.setText("");
+				
+				int nowYear= today.get(today.YEAR);
 				int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
 				int nowDate = today.get(today.DATE);// 현재 일 변수.
-				nowDate = nowDate + (100 * nowMonth);//비교되는 대상(현재날짜).
+				nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 				
 				Set<String> keys = hs.keySet();
 				Iterator<String> it = keys.iterator();
@@ -139,7 +147,7 @@ public class Class3 extends JFrame {
 							sDate += personx.n2.charAt(j);
 					}
 					int intDate = Integer.parseInt(sDate);//마감일을 나타내는 변수.
-					if (intDate < nowDate) {
+					if (intDate <= nowDate) {
 						if (personx.n4.equals("완료") || personx.n4.equals("완료*")){
 							jta.append(key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 + "\n");
 						}
@@ -147,9 +155,11 @@ public class Class3 extends JFrame {
 					sDate = "";//현재 날짜 초기화.
 				}
 			} else if (b.getText().contains("진행 미완")) { //위의 진행 완성과 비교조건문만 다름.
+				jta.setText("");
+				int nowYear= today.get(today.YEAR);
 				int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
 				int nowDate = today.get(today.DATE);// 현재 일 변수.
-				nowDate = nowDate + (100 * nowMonth);
+				nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 				
 				Set<String> keys = hs.keySet();
 				Iterator<String> it = keys.iterator();
@@ -161,7 +171,7 @@ public class Class3 extends JFrame {
 							sDate += personx.n2.charAt(j);
 					}
 					int intDate = Integer.parseInt(sDate);
-					if (intDate < nowDate) {
+					if (intDate <= nowDate) {
 						if (personx.n4.equals("미완") || personx.n4.equals("미완*")) {
 							jta.append(key + " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " " + personx.n4 + "\n");
 						}
@@ -169,9 +179,12 @@ public class Class3 extends JFrame {
 					sDate = "";
 				}
 			} else if (b.getText().contains("지남 완성")) { //위의 진행 완성과 비교조건문만 다름.
+				jta.setText("");
+				int nowYear= today.get(today.YEAR);
 				int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
 				int nowDate = today.get(today.DATE);// 현재 일 변수.
-				nowDate = nowDate + (100 * nowMonth);
+				nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
+				
 				
 				Set<String> keys = hs.keySet();
 				Iterator<String> it = keys.iterator();
@@ -183,7 +196,7 @@ public class Class3 extends JFrame {
 							sDate += personx.n2.charAt(j);
 					}
 					int intDate = Integer.parseInt(sDate);
-					if (!(intDate > nowDate)) {
+					if (!(intDate <= nowDate)) {
 						if (personx.n4.equals("완료") || personx.n4.equals("완료*")){
 							jta.append(key + " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 + "\n");
 							System.out.println(nowDate +"-" + intDate + key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 + "\n");
@@ -192,9 +205,12 @@ public class Class3 extends JFrame {
 					sDate = "";
 				}
 			} else if (b.getText().contains("지남 미완")) { //위의 진행 완성과 비교조건문만 다름.
+				jta.setText("");
+				int nowYear= today.get(today.YEAR);
 				int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
 				int nowDate = today.get(today.DATE);// 현재 일 변수.
-				nowDate = nowDate + (100 * nowMonth);
+				nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
+				
 				
 				Set<String> keys = hs.keySet();
 				Iterator<String> it = keys.iterator();
@@ -206,7 +222,7 @@ public class Class3 extends JFrame {
 							sDate += personx.n2.charAt(j);
 					}
 					int intDate = Integer.parseInt(sDate);
-					if (!(intDate > nowDate)) {
+					if (!(intDate <= nowDate)) {
 						if (personx.n4.equals("미완") || personx.n4.equals("미완*")){
 							jta.append(key + " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 + "\n");
 						}
