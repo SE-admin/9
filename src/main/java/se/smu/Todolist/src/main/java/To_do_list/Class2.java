@@ -115,7 +115,7 @@ public class Class2 extends JFrame{ //등록
 	   jp4.setLocation(460,270);
 	   jp4.setSize(270,20);
 	   
-	   JPanel jp5 = new JPanel(); // 입력형식 지정
+	   JPanel jp5 = new JPanel(); // 입력형식, 필수 입력 지정
 	   jp5.setLayout(new GridLayout(2,1));
 	   jl6 = new JLabel("마감기한, 실제마감일 입력 형식 : yyyymmdd");
 	   jl7 = new JLabel("Todo항목 명,과목 명,마감 기한,실제 마감일,완료or미완 필수입력");

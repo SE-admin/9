@@ -9,11 +9,11 @@ import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
 
-public class Class4 extends JFrame{
+public class Class4 extends JFrame{// 과목등록
 	JTextArea jta;
 	JButton jb1, jb2, jb3, jb4, jb5, jb6;
 	JTextField jt1, jt2, jt3, jt4;
-	JLabel jl1,jl2,jl3,jl4;
+	JLabel jl1,jl2,jl3,jl4,jl5;
 	HashMap<String, List> m = new HashMap<String, List>();
 	
 	class List{
@@ -81,6 +81,13 @@ public class Class4 extends JFrame{
 	   jp3.add(jt3);
 	   jp3.add(jt4);
 	   
+	   JPanel jp4 = new JPanel(); // 입력형식 지정
+	   jp4.setLayout(new GridLayout(1,1));
+	   jl5 = new JLabel("과목 명,담당 교수,강의 요일/시간,수강 년도/학기 필수입력");
+	   jp4.add(jl5);
+	   jp4.setLocation(10,270);
+	   jp4.setSize(390,15);
+	   
 	   jta = new JTextArea();
 	   JScrollPane js = new JScrollPane(jta);
 	   js.setLocation(10,10);
@@ -90,6 +97,7 @@ public class Class4 extends JFrame{
 	   add(jp1);
 	   add(jp2);
 	   add(jp3);
+	   add(jp4);
 	   setSize(900,360);
 	   setVisible(true);
 	}
@@ -97,19 +105,7 @@ public class Class4 extends JFrame{
 	class MyActionListener implements ActionListener{ 
 	   public void actionPerformed(ActionEvent e){ 
 	      JButton b = (JButton)e.getSource();
-	      if(b.getText().equals("조회")){
-	         Set<String> names = m.keySet();
-	         Vector<String>v = new Vector<String>();
-	         v.addAll(names); 
-	         Collections.sort(v);
-	         Iterator<String> it = v.iterator();
-	         while(it.hasNext()) {
-	            String name = it.next();
-	            List person = m.get(name);
-	            jta.append(name + " - " + person.s1 + " " + person.s2+ " "+person.s3+"\n");
-	         }
-	      }
-	      else if(b.getText().equals("검색")){
+	      if(b.getText().equals("검색")){
 	    	 try{
 		    	Scanner scan = new Scanner(new File("subject.txt"));
 		    	while(scan.hasNextLine()) { 
