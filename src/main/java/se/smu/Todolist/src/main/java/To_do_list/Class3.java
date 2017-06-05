@@ -121,7 +121,6 @@ public class Class3 extends JFrame {
 				String str = scan.nextLine();
 				String[] strArray = str.split(" ");
 			hs.put(strArray[0], new List(strArray[2],strArray[3],strArray[4],strArray[5],strArray[6],strArray[7],strArray[8],strArray[9])); // 해쉬맵에
-																																																// task를
 																																																// 넣음.
 			}
 			scan.close();
@@ -190,7 +189,7 @@ public class Class3 extends JFrame {
 								sDate += personx.n2.charAt(j);
 						}
 						int intDate = Integer.parseInt(sDate);//마감일을 나타내는 변수.
-						if (intDate <= nowDate) {
+						if (intDate >= nowDate) {
 								jta.append(key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 );
 								if(personx.n5.equals("1")){
 					        		importants = "*";
@@ -229,7 +228,7 @@ public class Class3 extends JFrame {
 								sDate += personx.n2.charAt(j);
 						}
 						int intDate = Integer.parseInt(sDate);
-						if (intDate <= nowDate) {
+						if (intDate >= nowDate) {
 							if (personx.n4.equals("미완") || personx.n4.equals("미완*")) {
 								jta.append(key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 );
 								if(personx.n5.equals("1")){
@@ -271,7 +270,7 @@ public class Class3 extends JFrame {
 								sDate += personx.n2.charAt(j);
 						}
 						int intDate = Integer.parseInt(sDate);
-						if (!(intDate <= nowDate)) {
+						if (!(intDate >= nowDate)) {
 								jta.append(key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 );
 								if(personx.n5.equals("1")){
 					        		importants = "*";
@@ -313,7 +312,7 @@ public class Class3 extends JFrame {
 								sDate += personx.n2.charAt(j);
 						}
 						int intDate = Integer.parseInt(sDate);
-						if (!(intDate <= nowDate)) {
+						if (!(intDate >= nowDate)) {
 							if (personx.n4.equals("완료") || personx.n4.equals("완료*")){
 								jta.append(key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 );
 								if(personx.n5.equals("1")){
