@@ -14,7 +14,7 @@ public class Class2 extends JFrame{ //등록
 	JTextArea jta;
 	JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9;
 	JTextField jt1, jt2, jt3, jt4, jt5;
-	JLabel jl1,jl2,jl3,jl4,jl5,jl6;
+	JLabel jl1,jl2,jl3,jl4,jl5,jl6,jl7;
 	HashMap<String, List> o = new HashMap<String, List>();
 	
 	class List{
@@ -118,9 +118,11 @@ public class Class2 extends JFrame{ //등록
 	   JPanel jp5 = new JPanel(); // 입력형식 지정
 	   jp5.setLayout(new GridLayout(2,1));
 	   jl6 = new JLabel("마감기한, 실제마감일 입력 형식 : yyyymmdd");
+	   jl7 = new JLabel("Todo항목 명,과목 명,마감 기한,실제 마감일,완료or미완 필수입력");
 	   jp5.add(jl6);
+	   jp5.add(jl7);
 	   jp5.setLocation(10,270);
-	   jp5.setSize(300,30);
+	   jp5.setSize(390,30);
 	   
 	   jta = new JTextArea();
 	   JScrollPane js = new JScrollPane(jta);
@@ -190,12 +192,13 @@ public class Class2 extends JFrame{ //등록
 	         jt5.setText("");
 	      }
 	      else if(b.getText().equals("삽입")){ //To do 항목 변경
+	    	 int subject_exist = 0;
 	    	 Color prevColor = b.getBackground();
 	    	 jb5.setBackground(prevColor);
 	    	 jb7.setBackground(prevColor);
 		     jb8.setBackground(prevColor);
 		     jb9.setBackground(prevColor);
-	    	 try{
+	    	 try{ // 현재 저장되어있는 리스트 읽기
 	    		 Scanner scan = new Scanner(new File("list.txt"));
 	    		 while(scan.hasNextLine()) { 
 	    			 String str = scan.nextLine();
@@ -206,7 +209,22 @@ public class Class2 extends JFrame{ //등록
 	    	 }catch(IOException e1){
 	    		 System.out.println("입출력 오류");
 	    	 }
-	    	 o.put(jt1.getText(), new List(jt2.getText(),jt3.getText(),jt4.getText(),jt5.getText(),String.valueOf(important),String.valueOf(tag_hard),String.valueOf(tag_long),String.valueOf(tag_team)));
+	    	 try{ // 과목 존재 확인과정
+	    		 Scanner scan2 = new Scanner(new File("subject.txt"));
+	    		 while(scan2.hasNextLine()){
+	    			 String str2 = scan2.nextLine();
+	    			 String[] strArray2 = str2.split(" ");
+	    			 if(strArray2[0].equals(jt2.getText()))
+	    				 subject_exist = 1;
+	    		 }
+	    		 scan2.close();
+	    	 }catch(IOException e1){
+	    		 System.out.println("입출력 오류");
+	    	 }
+	    	 if(subject_exist == 1)
+	    		 o.put(jt1.getText(), new List(jt2.getText(),jt3.getText(),jt4.getText(),jt5.getText(),String.valueOf(important),String.valueOf(tag_hard),String.valueOf(tag_long),String.valueOf(tag_team)));
+	    	 else if(subject_exist == 0)
+	    		 jta.append("과목이 존재하지 않습니다.\n");
 	    	 important = 0;
 	    	 tag_hard = 0;
 	    	 tag_long = 0;
@@ -216,7 +234,7 @@ public class Class2 extends JFrame{ //등록
 	         jt3.setText("");
 	         jt4.setText("");
 	         jt5.setText("");
-	         try{
+	         try{ // 파일에 저장
 	    		  File f = new File("list.txt");
 	    		  FileWriter fw = new FileWriter(f);
 	    		  PrintWriter pw = new PrintWriter(fw);
