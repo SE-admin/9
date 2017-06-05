@@ -66,17 +66,17 @@ public class Class1 extends JFrame { // ¿À´Ã, ´Þ·Â
 		jp1.add(jb2);
 		jp1.add(jb3);
 		jp1.add(jb4);
-		jp1.setLocation(20,450);
-		jp1.setSize(360,30);
+		jp1.setLocation(15,470);
+		jp1.setSize(435,30);
 		
 		jta = new TextArea("",20, 40, TextArea.SCROLLBARS_NONE);
 		JScrollPane js = new JScrollPane(jta);
-		js.setSize(370, 400);
+		js.setSize(435, 440);
 		js.setLocation(15, 20);
 		
 		add(js);
 		add(jp1);
-	    setSize(415,550);
+	    setSize(480,550);
 	    setVisible(true);
 	    
 	    

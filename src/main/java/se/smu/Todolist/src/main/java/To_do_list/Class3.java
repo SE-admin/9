@@ -58,10 +58,10 @@ public class Class3 extends JFrame {
 		MyActionListener listener = new MyActionListener();
 		JPanel jp1 = new JPanel();
 		jp1.setLayout(new GridLayout(1, 4));
-		jb1 = new JButton("오늘");
-		jb2 = new JButton("달력");
-		jb3 = new JButton("과제");
-		jb4 = new JButton("등록");
+		jb1 = new JButton("오  늘");
+		jb2 = new JButton("달  력");
+		jb3 = new JButton("과  제");
+		jb4 = new JButton("등  록");
 		jb1.addActionListener(listener);
 		jb2.addActionListener(listener);
 		jb3.addActionListener(listener);
@@ -70,8 +70,8 @@ public class Class3 extends JFrame {
 		jp1.add(jb2);
 		jp1.add(jb3);
 		jp1.add(jb4);
-		jp1.setLocation(20, 460);
-		jp1.setSize(360, 30);
+		jp1.setLocation(15, 460);
+		jp1.setSize(435, 30);
 
 		JPanel jp2 = new JPanel();
 		jp2.setLayout(new GridLayout(1, 3));
@@ -100,17 +100,17 @@ public class Class3 extends JFrame {
 		jp2.add(jb5);
 		
 		jp2.setLocation(20, 10);
-		jp2.setSize(360, 30);
+		jp2.setSize(430, 30);
 
 		jta = new TextArea("", 20, 40, TextArea.SCROLLBARS_NONE);
 		JScrollPane js = new JScrollPane(jta);
-		js.setSize(370, 400);
+		js.setSize(435, 400);
 		js.setLocation(15, 50);
 
 		add(js);
 		add(jp1);
 		add(jp2);
-		setSize(415, 550);
+		setSize(480, 550);
 		setVisible(true);
 		
 		//Class3가 실행되면 list.txt의 todo를 hashmap에 올림.
@@ -168,22 +168,22 @@ public class Class3 extends JFrame {
 				
 			
 			
-			if (b.getText().equals("오늘")) {
+			if (b.getText().equals("오  늘")) {
 				hs.clear();//다른 버튼을 눌렀을 경우 해쉬맵 초기화.
 				setVisible(false);
 				new Class1();
-			} else if (b.getText().equals("달력")) {
+			} else if (b.getText().equals("달  력")) {
 				hs.clear();
 				jta.setText("*** 달력 *** \n \n"); // 달력을 표시하는 함수 추가
 			} else if (b.getText().equals("과제")) {
 				hs.clear();
 				setVisible(false);
 				new Class3();
-			} else if (b.getText().equals("등록")) {
+			} else if (b.getText().equals("등  록")) {
 				hs.clear();
 				setVisible(false);
 				new Class2();
-			} else if(b.getText().equals("조회")){
+			} else if(b.getText().equals("조  회")){
 				if(state.equals("진행중") && show.equals("완료표시")){
 					jta.setText("");
 					
