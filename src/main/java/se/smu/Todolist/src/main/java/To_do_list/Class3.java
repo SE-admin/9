@@ -165,8 +165,6 @@ public class Class3 extends JFrame {
 				 if(jb2.isSelected())
 					 show = jb2.getText().trim();
 			}
-				
-			
 			
 			if (b.getText().equals("오  늘")) {
 				hs.clear();//다른 버튼을 눌렀을 경우 해쉬맵 초기화.
@@ -183,7 +181,7 @@ public class Class3 extends JFrame {
 				hs.clear();
 				setVisible(false);
 				new Class2();
-			} else if(b.getText().equals("조  회")){
+			} else if(b.getText().equals("조회")){
 				if(state.equals("진행중") && show.equals("완료표시")){
 					jta.setText("");
 					
