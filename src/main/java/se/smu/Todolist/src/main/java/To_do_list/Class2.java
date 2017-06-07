@@ -153,6 +153,7 @@ public class Class2 extends JFrame{ //µî·Ï
 	    	 tag_hard = 0;
 	    	 tag_long = 0;
 	    	 tag_team = 0;
+	    	 
 	    	 try{
 		    	 Scanner scan = new Scanner(new File("list.txt"));
 		    	 while(scan.hasNextLine()) { 

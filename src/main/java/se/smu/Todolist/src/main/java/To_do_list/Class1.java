@@ -228,6 +228,7 @@ public class Class1 extends JFrame { // ¿À´Ã, ´Þ·Â
 	public static void main(String[] args) {
 		new Class1();
 	}
+	
 }
 
 

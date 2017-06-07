@@ -42,6 +42,7 @@ public class PrintCal extends LimitMonth{
     		}
     	date[row][column]=++cal_num;
     	}
+    	
     }
     //PrintCal을 사용하시기전에 먼저 달력을 만드셔야 합니다. 이 함수를 사용해서 달력을 만들어주세요,SumDate의 객체화 후 Getter를 받아주세요
     

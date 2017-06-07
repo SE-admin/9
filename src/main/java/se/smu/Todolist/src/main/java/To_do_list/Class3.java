@@ -414,6 +414,7 @@ public class Class3 extends JFrame {
 					}
 					}
 						sDate = "";
+						
 					}
 				}
 			} 

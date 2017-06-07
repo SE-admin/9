@@ -189,6 +189,7 @@ public class Class4 extends JFrame{// 과목등록
 	    	  setVisible(false);
 	    	  new Class2();
 	      }
+	      
 	   }
 
 	}
