@@ -1,16 +1,17 @@
 package To_do_list;
 
 import javax.swing.*;
+
+
 import java.awt.event.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.awt.*;
 // 날짜 구해주는 패키
 import java.util.*;
-import java.util.Calendar;
 
 public class Class3 extends JFrame {
-	private static final long serialVersionUID = 1L;
 	String str = null;
 	boolean hasMore = true;
 	String sDate = new String();
@@ -171,7 +172,8 @@ public class Class3 extends JFrame {
 				new Class1();
 			} else if (b.getText().equals("달  력")) {
 				hs.clear();
-				jta.setText("*** 달력 *** \n \n"); // 달력을 표시하는 함수 추가
+				setVisible(false);
+				new Calendar();
 			} else if (b.getText().equals("과제")) {
 				hs.clear();
 				setVisible(false);
@@ -183,10 +185,9 @@ public class Class3 extends JFrame {
 			} else if(b.getText().equals("조회")){
 				if(state.equals("진행중") && show.equals("완료표시")){
 					jta.setText("");
-					
-					int nowYear= today.get(Calendar.YEAR);
-					int nowMonth = today.get(Calendar.MONTH) + 1; // 현재 월 변수.
-					int nowDate = today.get(Calendar.DATE);// 현재 일 변수.
+					int nowYear= today.get(today.YEAR);
+					int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
+					int nowDate = today.get(today.DATE);// 현재 일 변수.
 					nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 					
 					Set<String> keys = hs.keySet();
@@ -194,11 +195,14 @@ public class Class3 extends JFrame {
 					for (int i = 0; i < hs.size(); i++) {//list하나씩 비교.
 						String key = (String)it.next();
 						List personx = hs.get(key);
-						for(int j=0; j<personx.n2.length(); j++){//마감일을 MMdd형식으로 나타냄.
+						for(int j=0; j<personx.n2.length(); j++){//마감일을 yyyyMMdd형식으로 나타냄.
 							if(48 <= personx.n2.charAt(j) && personx.n2.charAt(j) <= 57)
 								sDate += personx.n2.charAt(j);
 						}
+						int check=0;
+					    check=Integer.valueOf(personx.n5);
 						int intDate = Integer.parseInt(sDate);//마감일을 나타내는 변수.
+						if(check == 1){
 						if (intDate >= nowDate) {
 							if(personx.n5.equals("1")) {
 									try {
@@ -241,13 +245,73 @@ public class Class3 extends JFrame {
 								jta.append("\n");
 						}
 						}
+						}
 						sDate = "";//현재 날짜 초기화.
+					
+					}
+					Iterator<String> it1 = keys.iterator();
+					for (int i = 0; i < hs.size(); i++) {//list하나씩 비교.
+						String key1 = (String)it1.next();
+						List personx1 = hs.get(key1);
+						for(int j=0; j<personx1.n2.length(); j++){//마감일을 MMdd형식으로 나타냄.
+							if(48 <= personx1.n2.charAt(j) && personx1.n2.charAt(j) <= 57)
+								sDate += personx1.n2.charAt(j);
+						}
+						int intDate = Integer.parseInt(sDate);//마감일을 나타내는 변수.
+						int check=0;
+					    check=Integer.valueOf(personx1.n5);
+					    if(check == 0){
+						if (intDate >= nowDate) {
+							if(personx1.n5.equals("1")) {
+									try {
+										jta.append("☆ " + "D-" + diffOfDate( Integer.toString(nowDate),  Integer.toString(intDate)) + " " +key1+ " - " + personx1.n1 + " " + personx1.n2 + " " + personx1.n3 + " " + personx1.n4 + " ");
+									} catch (Exception e1) {
+										e1.printStackTrace();
+									}
+									if(personx1.n6.equals("1")){
+										tag_hards="힘듬";
+										jta.append(tag_hards+" "); 
+									}
+									if(personx1.n7.equals("1")){
+										tag_longs="오래걸림";
+										jta.append(tag_longs+" "); 
+									}
+									if(personx1.n8.equals("1")){
+										tag_teams="팀플";
+										jta.append(tag_teams); 
+									}
+									jta.append("\n");
+							}
+							else {
+								try {
+									jta.append("D-" + diffOfDate( Integer.toString(nowDate),  Integer.toString(intDate)) + " " +key1+ " - " + personx1.n1 + " " + personx1.n2 + " " + personx1.n3 + " "+ personx1.n4 + " ");
+								} catch (Exception e1) {
+									e1.printStackTrace();
+								}
+								if(personx1.n6.equals("1")){
+									tag_hards="힘듬";
+									jta.append(tag_hards+" "); 
+								}
+								if(personx1.n7.equals("1")){
+									tag_longs="오래걸림";
+									jta.append(tag_longs+" "); 
+								}
+								if(personx1.n8.equals("1")){
+									tag_teams="팀플";
+									jta.append(tag_teams); 
+								}
+								jta.append("\n");
+						}
+						}
+					    }
+						sDate = "";//현재 날짜 초기화.
+					
 					}
 				} else if(state.equals("진행중") && show.equals("완료표시X")){
 					jta.setText("");
-					int nowYear= today.get(Calendar.YEAR);
-					int nowMonth = today.get(Calendar.MONTH) + 1; // 현재 월 변수.
-					int nowDate = today.get(Calendar.DATE);// 현재 일 변수.
+					int nowYear= today.get(today.YEAR);
+					int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
+					int nowDate = today.get(today.DATE);// 현재 일 변수.
 					nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 					
 					Set<String> keys = hs.keySet();
@@ -260,6 +324,9 @@ public class Class3 extends JFrame {
 								sDate += personx.n2.charAt(j);
 						}
 						int intDate = Integer.parseInt(sDate);
+						int check=0;
+					    check=Integer.valueOf(personx.n5);
+					    if(check == 1){
 						if (intDate >= nowDate) {
 							if(personx.n5.equals("1") && personx.n4.equals("미완")) {
 								try {
@@ -302,13 +369,73 @@ public class Class3 extends JFrame {
 							jta.append("\n");
 						}
 					}
+					    }
 						sDate = "";
+					
+					}
+					Iterator<String> it1 = keys.iterator();
+					for (int i = 0; i < hs.size(); i++) {
+						String key = (String)it1.next();
+						List personx = hs.get(key);
+						for(int j=0; j<personx.n2.length(); j++){
+							if(48 <= personx.n2.charAt(j) && personx.n2.charAt(j) <= 57)
+								sDate += personx.n2.charAt(j);
+						}
+						int intDate = Integer.parseInt(sDate);
+						int check=0;
+					    check=Integer.valueOf(personx.n5);
+					    if(check == 0){
+						if (intDate >= nowDate) {
+							if(personx.n5.equals("1") && personx.n4.equals("미완")) {
+								try {
+									jta.append("☆ " + "D-" + diffOfDate( Integer.toString(nowDate),  Integer.toString(intDate)) + " " +key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " " + personx.n4 + " ");
+								} catch (Exception e1) {
+									e1.printStackTrace();
+								}
+								if(personx.n6.equals("1")){
+									tag_hards="힘듬";
+									jta.append(tag_hards+" "); 
+								}
+								if(personx.n7.equals("1")){
+									tag_longs="오래걸림";
+									jta.append(tag_longs+" "); 
+								}
+								if(personx.n8.equals("1")){
+									tag_teams="팀플";
+									jta.append(tag_teams); 
+								}
+								jta.append("\n");
+						}
+						else if(personx.n4.equals("미완")) {
+							try {
+								jta.append("D-" + diffOfDate( Integer.toString(nowDate),  Integer.toString(intDate)) + " " +key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 + " ");
+							} catch (Exception e1) {
+								e1.printStackTrace();
+							}
+							if(personx.n6.equals("1")){
+								tag_hards="힘듬";
+								jta.append(tag_hards+" "); 
+							}
+							if(personx.n7.equals("1")){
+								tag_longs="오래걸림";
+								jta.append(tag_longs+" "); 
+							}
+							if(personx.n8.equals("1")){
+								tag_teams="팀플";
+								jta.append(tag_teams); 
+							}
+							jta.append("\n");
+						}
+					}
+					    }
+						sDate = "";
+					
 					}
 				} else if(state.equals("지남") && show.equals("완료표시")){
 					jta.setText("");
-					int nowYear= today.get(Calendar.YEAR);
-					int nowMonth = today.get(Calendar.MONTH) + 1; // 현재 월 변수.
-					int nowDate = today.get(Calendar.DATE);// 현재 일 변수.
+					int nowYear= today.get(today.YEAR);
+					int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
+					int nowDate = today.get(today.DATE);// 현재 일 변수.
 					nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 					
 					
@@ -321,6 +448,9 @@ public class Class3 extends JFrame {
 							if(48 <= personx.n2.charAt(j) && personx.n2.charAt(j) <= 57)
 								sDate += personx.n2.charAt(j);
 						}
+						int check=0;
+					    check=Integer.valueOf(personx.n5);
+					    if(check == 1){
 						int intDate = Integer.parseInt(sDate);
 						if (!(intDate >= nowDate)) {
 							if(personx.n5.equals("1")) {
@@ -356,15 +486,65 @@ public class Class3 extends JFrame {
 							jta.append("\n");
 					}
 					}
+					    }
 						sDate = "";
+					
 					}
+					Iterator<String> it1 = keys.iterator();
+					for (int i = 0; i < hs.size(); i++) {
+						String key = (String)it1.next();
+						List personx = hs.get(key);
+						for(int j=0; j<personx.n2.length(); j++){
+							if(48 <= personx.n2.charAt(j) && personx.n2.charAt(j) <= 57)
+								sDate += personx.n2.charAt(j);
+						}
+						int check=0;
+					    check=Integer.valueOf(personx.n5);
+					    if(check == 0){
+						int intDate = Integer.parseInt(sDate);
+						if (!(intDate >= nowDate)) {
+							if(personx.n5.equals("1")) {
+								jta.append("☆ " + key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " " + personx.n4 + " ");
+								if(personx.n6.equals("1")){
+									tag_hards="힘듬";
+									jta.append(tag_hards+" "); 
+								}
+								if(personx.n7.equals("1")){
+									tag_longs="오래걸림";
+									jta.append(tag_longs+" "); 
+								}
+								if(personx.n8.equals("1")){
+									tag_teams="팀플";
+									jta.append(tag_teams); 
+								}
+								jta.append("\n");
+						}
+						else {
+							jta.append(key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 + " ");
+							if(personx.n6.equals("1")){
+								tag_hards="힘듬";
+								jta.append(tag_hards+" "); 
+							}
+							if(personx.n7.equals("1")){
+								tag_longs="오래걸림";
+								jta.append(tag_longs+" "); 
+							}
+							if(personx.n8.equals("1")){
+								tag_teams="팀플";
+								jta.append(tag_teams); 
+							}
+							jta.append("\n");
+					}
+					}
+					    }
+						sDate = "";
 					
-					
+					}
 				} else if(state.equals("지남") && show.equals("완료표시X")){
 					jta.setText("");
-					int nowYear= today.get(Calendar.YEAR);
-					int nowMonth = today.get(Calendar.MONTH) + 1; // 현재 월 변수.
-					int nowDate = today.get(Calendar.DATE);// 현재 일 변수.
+					int nowYear= today.get(today.YEAR);
+					int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
+					int nowDate = today.get(today.DATE);// 현재 일 변수.
 					nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 					
 					
@@ -378,6 +558,9 @@ public class Class3 extends JFrame {
 								sDate += personx.n2.charAt(j);
 						}
 						int intDate = Integer.parseInt(sDate);
+						int check=0;
+					    check=Integer.valueOf(personx.n5);
+					    if(check==1){
 						if (!(intDate >= nowDate)) {
 							if(personx.n5.equals("1") && personx.n4.equals("미완")) {
 								jta.append("☆ " + key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " " + personx.n4 + " ");
@@ -412,8 +595,58 @@ public class Class3 extends JFrame {
 							jta.append("\n");
 					}
 					}
+					    }
 						sDate = "";
-						
+					
+					}
+					Iterator<String> it1 = keys.iterator();
+					for (int i = 0; i < hs.size(); i++) {
+						String key = (String)it1.next();
+						List personx = hs.get(key);
+						for(int j=0; j<personx.n2.length(); j++){
+							if(48 <= personx.n2.charAt(j) && personx.n2.charAt(j) <= 57)
+								sDate += personx.n2.charAt(j);
+						}
+						int intDate = Integer.parseInt(sDate);
+						int check=0;
+					    check=Integer.valueOf(personx.n5);
+					    if(check==0){
+						if (!(intDate >= nowDate)) {
+							if(personx.n5.equals("1") && personx.n4.equals("미완")) {
+								jta.append("☆ " + key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " " + personx.n4 + " ");
+								if(personx.n6.equals("1")){
+									tag_hards="힘듬";
+									jta.append(tag_hards+" "); 
+								}
+								if(personx.n7.equals("1")){
+									tag_longs="오래걸림";
+									jta.append(tag_longs+" "); 
+								}
+								if(personx.n8.equals("1")){
+									tag_teams="팀플";
+									jta.append(tag_teams); 
+								}
+								jta.append("\n");
+						}
+						else if(personx.n4.equals("미완")) {
+							jta.append(key+ " - " + personx.n1 + " " + personx.n2 + " " + personx.n3 + " "+ personx.n4 + " ");
+							if(personx.n6.equals("1")){
+								tag_hards="힘듬";
+								jta.append(tag_hards+" "); 
+							}
+							if(personx.n7.equals("1")){
+								tag_longs="오래걸림";
+								jta.append(tag_longs+" "); 
+							}
+							if(personx.n8.equals("1")){
+								tag_teams="팀플";
+								jta.append(tag_teams); 
+							}
+							jta.append("\n");
+					}
+					}
+					    }
+						sDate = "";
 					}
 				}
 			} 
