@@ -1,15 +1,13 @@
 package To_do_list;
 
 import javax.swing.*;
-
-import To_do_list.Class4.List;
-
 import java.awt.event.*;
 import java.io.*;
 import java.awt.*;
 import java.util.*;
 
 public class Class2 extends JFrame{ //µî·Ï
+	private static final long serialVersionUID = 1L;
 	int important=0,tag_hard=0,tag_long=0,tag_team=0;
 	JTextArea jta;
 	JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9;

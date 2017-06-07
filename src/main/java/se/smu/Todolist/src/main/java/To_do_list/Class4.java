@@ -1,15 +1,13 @@
 package To_do_list;
 
 import javax.swing.*;
-
-import To_do_list.Class2.List;
-
 import java.io.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
 
 public class Class4 extends JFrame{// 과목등록
+	private static final long serialVersionUID = 1L;
 	JTextArea jta;
 	JButton jb1, jb2, jb3, jb4, jb5, jb6;
 	JTextField jt1, jt2, jt3, jt4;

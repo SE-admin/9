@@ -80,7 +80,6 @@ public class SumDate{
 			sumDateDetail += date;
 	}
 	public int getSumDateDetail(){
-		
 	return sumDateDetail;	
 	}
 	//일과 달과 년도를 입력하면 총합 날짜를 반환합니다.

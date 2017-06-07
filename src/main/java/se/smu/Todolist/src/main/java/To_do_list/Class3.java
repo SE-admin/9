@@ -1,17 +1,16 @@
 package To_do_list;
 
 import javax.swing.*;
-
-
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.awt.*;
 // 날짜 구해주는 패키
 import java.util.*;
+import java.util.Calendar;
 
 public class Class3 extends JFrame {
+	private static final long serialVersionUID = 1L;
 	String str = null;
 	boolean hasMore = true;
 	String sDate = new String();
@@ -185,9 +184,9 @@ public class Class3 extends JFrame {
 				if(state.equals("진행중") && show.equals("완료표시")){
 					jta.setText("");
 					
-					int nowYear= today.get(today.YEAR);
-					int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
-					int nowDate = today.get(today.DATE);// 현재 일 변수.
+					int nowYear= today.get(Calendar.YEAR);
+					int nowMonth = today.get(Calendar.MONTH) + 1; // 현재 월 변수.
+					int nowDate = today.get(Calendar.DATE);// 현재 일 변수.
 					nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 					
 					Set<String> keys = hs.keySet();
@@ -246,9 +245,9 @@ public class Class3 extends JFrame {
 					}
 				} else if(state.equals("진행중") && show.equals("완료표시X")){
 					jta.setText("");
-					int nowYear= today.get(today.YEAR);
-					int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
-					int nowDate = today.get(today.DATE);// 현재 일 변수.
+					int nowYear= today.get(Calendar.YEAR);
+					int nowMonth = today.get(Calendar.MONTH) + 1; // 현재 월 변수.
+					int nowDate = today.get(Calendar.DATE);// 현재 일 변수.
 					nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 					
 					Set<String> keys = hs.keySet();
@@ -307,9 +306,9 @@ public class Class3 extends JFrame {
 					}
 				} else if(state.equals("지남") && show.equals("완료표시")){
 					jta.setText("");
-					int nowYear= today.get(today.YEAR);
-					int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
-					int nowDate = today.get(today.DATE);// 현재 일 변수.
+					int nowYear= today.get(Calendar.YEAR);
+					int nowMonth = today.get(Calendar.MONTH) + 1; // 현재 월 변수.
+					int nowDate = today.get(Calendar.DATE);// 현재 일 변수.
 					nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 					
 					
@@ -363,9 +362,9 @@ public class Class3 extends JFrame {
 					
 				} else if(state.equals("지남") && show.equals("완료표시X")){
 					jta.setText("");
-					int nowYear= today.get(today.YEAR);
-					int nowMonth = today.get(today.MONTH) + 1; // 현재 월 변수.
-					int nowDate = today.get(today.DATE);// 현재 일 변수.
+					int nowYear= today.get(Calendar.YEAR);
+					int nowMonth = today.get(Calendar.MONTH) + 1; // 현재 월 변수.
+					int nowDate = today.get(Calendar.DATE);// 현재 일 변수.
 					nowDate = nowDate + (100 * nowMonth) + (10000 * nowYear);
 					
 					
