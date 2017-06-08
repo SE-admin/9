@@ -1,6 +1,9 @@
 package To_do_list;
 
 import javax.swing.*;
+
+import To_do_list.Class2.List;
+
 import java.io.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -178,8 +181,27 @@ public class Class4 extends JFrame{// 과목등록
 	         jt2.setText("");
 	         jt3.setText("");
 	         jt4.setText("");
+	      
+	      try{
+    		  File f = new File("subject.txt");
+    		  FileWriter fw = new FileWriter(f);
+    		  PrintWriter pw = new PrintWriter(fw);
+    		  Set<String> names = m.keySet();
+		      Vector<String>v = new Vector<String>();
+		      v.addAll(names); 
+		      Collections.sort(v);
+		      Iterator<String> it = v.iterator();
+		      while(it.hasNext()) {
+		         String name = it.next();
+		         List person = m.get(name);
+		         pw.println(name+" - "+person.s1+" "+person.s2+" "+person.s3);
+		      }
+    		  pw.close();
+    	 }catch(IOException e1){
+    		  System.out.println("입출력 오류");
+    	 }
 	      }
-	      else if(b.getText().equals("돌아가기")){
+	   else if(b.getText().equals("돌아가기")){
 	    	  setVisible(false);
 	    	  new Class1();
 	      }
